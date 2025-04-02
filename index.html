@@ -1,0 +1,278 @@
+<html>
+	<head>
+		<title>Damage estimation</title>
+		
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	</head>
+	<body class="container">
+		<div class="row">
+			<div class="col-12 col-md-6">
+				<!-- Weapon profile + weapon abilities -->
+				<h2  class="mb-3">
+					Weapon profile
+				</h2>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="weapon-title-label">
+						<strong>Title</strong>
+					</span>
+					<input type="text" class="form-control" aria-label="Title" aria-describedby="weapon-title-label" id="weapon_title" type="text" url-param="wp_t">
+				</div>
+				
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Attacks</strong>
+					</span>
+					<span class="input-group-text">Total:</span>
+					<span class="input-group-text" id="attacks_display"></span>
+
+					<span class="input-group-text">Base</span>
+					<input class="form-control" 
+						id="attacks" type="number" url-param="a" default-value="1" min="0" step="1"/>
+
+					<span class="input-group-text">D6</span>
+					<input class="form-control" 
+						id="attacks_d6" type="number" url-param="ad6" default-value="0" min="0" step="1"/>
+
+					<span class="input-group-text">D3</span>
+					<input class="form-control" 
+						id="attacks_d3" type="number" url-param="ad3" default-value="0" min="0" step="1"/>
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="skill-title-label">
+						<strong>Skill (N+)</strong>
+					</span>
+					<input class="form-control" aria-label="Skill" aria-describedby="skill-title-label"
+					id="skill" type="number" min="1" max="6" url-param="ws" default-value="4">
+
+					<div class="input-group-text">Torrent: </div>
+					<div class="input-group-text">
+						<input type="checkbox" id="hasn_skill" url-param="torr">
+					</div>
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Strength</strong>
+					</span>
+					<input class="form-control"
+						id="strength" type="number" min="1" url-param="s" default-value="1" step="1">
+				</div>
+				
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>AP</strong>
+					</span>
+					<input class="form-control"
+						id="ap" type="number" max="0" url-param="ap" default-value="0" step="1">
+				</div>
+				
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Damage</strong>
+					</span>
+					<span class="input-group-text">Total:</span>
+					<span class="input-group-text" id="damage_display"></span>
+
+					<span class="input-group-text">Base</span>
+					<input class="form-control" 
+						id="damage" type="number" url-param="dam" default-value="1" min="0" step="1"/>
+
+					<span class="input-group-text">D6</span>
+					<input class="form-control" 
+						id="damage_d6" type="number" url-param="dd6" default-value="0" min="0" step="1"/>
+
+					<span class="input-group-text">D3</span>
+					<input class="form-control" 
+						id="damage_d3" type="number" url-param="dd3" default-value="0" min="0" step="1"/>
+				</div>
+
+				<h2 class="mb-3">
+					Weapon abilities
+				</h2>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Anti (N+)</strong>
+					</span>
+					<div class="input-group-text">
+						<input type="checkbox" id="has_anti" url-param="h_anti">
+					</div>
+					<input class="form-control"
+						id="anti" type="number" url-param="anti" default-value="4" max="6" min="2" step="1">
+				</div>
+				
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Devastating wounds</strong>
+					</span>
+					<span class="input-group-text">
+						<input type="checkbox" id="dev_wounds" url-param="de_w">
+					</span>
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Lethal hits</strong>
+					</span>
+					<span class="input-group-text">
+						<input type="checkbox" id="lethal_hits" url-param="l_h">
+					</span>
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Sustained hits</strong>
+					</span>
+					<div class="input-group-text">
+						<input type="checkbox" id="has_sustained_hits" url-param="h_sh">
+					</div>
+					<input class="form-control"
+						id="sustained_hits" type="number" url-param="sh" default-value="1" min="1" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Critical hit on N+</strong>
+					</span>
+					<input class="form-control" 
+					id="crit_hit" type="number" url-param="cr_h" default-value="6" max="6" min="2" step="1">
+				</div>
+
+			</div>
+
+			<div class="col-12 col-md-6">
+				<!-- Target things -->
+				<h2 class="mb-3">
+					Target
+				</h2>
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Title</strong>
+					</span>
+					<input class="form-control" 
+						id="target_title" type="text" url-param="t_t">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Toughness</strong>
+					</span>
+					<input class="form-control"
+						id="toughness" type="number" url-param="t" default-value="3" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Save (N+)</strong>
+					</span>
+					<input class="form-control"
+						id="save" type="number" url-param="sv" default-value="3" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Invulnerable save (N+)</strong>
+					</span>
+					<div class="input-group-text">
+						<input type="checkbox" id="has_invuln_save" url-param="h_invs">
+					</div>
+					<input class="form-control"
+						id="invuln_save" type="number" url-param="invuln_sv" default-value="6" max="6" min="1" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Wounds per model</strong>
+					</span>
+					<input class="form-control"
+						id="wounds" type="number" url-param="w" default-value="3" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Feel no pain</strong>
+					</span>
+					<div class="input-group-text">
+						<input type="checkbox" id="has_feel_no_pain" url-param="h_fnp">
+					</div>
+					<input class="form-control"
+						id="feel_no_pain" type="number" url-param="fnp" default-value="6" max="6" min="1" step="1">
+				</div>
+			
+				<h2 class="mb-3">
+					Modifiers
+				</h2>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>To hit</strong>
+					</span>
+					<input class="form-control"
+						id="hit_modifier" type="number" url-param="hit_m" default-value="0" min="-1" max="1" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Hit reroll</strong>
+					</span>
+					<select class="custom-select" id="hit_reroll" url-param="h_reroll" default-value="">
+						<option value="">None</option>
+						<option value="1">1</option>
+						<option value="all">All</option>
+					</select>
+				</div>
+				
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Fish for crits - hits</strong>
+					</span>
+					<span class="input-group-text">
+						<input type="checkbox" id="hit_fish6" url-param="h_f6">
+					</span>
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>To wound</strong>
+					</span>
+					<input class="form-control"
+						id="wound_modifier" type="number" url-param="wnd_m" default-value="0" min="-1" max="1" step="1">
+				</div>
+
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Wound reroll</strong>
+					</span>
+					<select class="custom-select" id="wound_reroll" url-param="w_reroll" default-value="">
+						<option value="">None</option>
+						<option value="1">1</option>
+						<option value="all">All</option>
+					</select>
+				</div>
+				
+				<div class="input-group mb-3">
+					<span class="input-group-text">
+						<strong>Fish for crits - wounds</strong>
+					</span>
+					<span class="input-group-text">
+						<input type="checkbox" id="wnd_fish6" url-param="w_f6">
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<button id="go_button" class="btn btn-primary btn-lg btn-block col-12 mb-3 mt-3">Calculate</button>
+
+		<h2>
+			Wound probabilities:
+		</h2> 
+		<div id="woundChart"></div>
+		<div id="modelChart"></div>
+
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script src="code.js"></script>
+	</body>
+</html>
