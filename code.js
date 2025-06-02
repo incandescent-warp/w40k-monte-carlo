@@ -91,7 +91,8 @@ function recalculate() {
 
             const savesToRoll = wounds + (woundRoll.pass + woundRoll.critical - devastatingWounds);
 
-            const saveRoll = rollDice(savesToRoll, effectiveSave);
+            // save rolls dont have the critical success on 6
+            const saveRoll = rollDice(savesToRoll, effectiveSave, "", false, 0, effectiveSave);
 
             const damageRolls = saveRoll.fail + devastatingWounds;
 
